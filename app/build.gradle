@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+//添加Kotlin支持Android的插件
+
+android {
+
+    //签名的配置
+    signingConfigs {
+        ts_sign {
+            keyAlias 'ts_test'
+            keyPassword '123456'
+            storeFile file('D:/tangsheng_work/WorkSpace/YmTest/app/ts_sign.jks')
+            storePassword '123456'
+        }
+    }
+
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.ymtest"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.ts_sign
+        }
+    }
+
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/aspectjrt-1.7.3.jar')
+    compile files('libs/isoparser-1.0-RC-2.jar')
+    compile files('libs/isoparser-1.0-RC-15-javadoc.jar')
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+}
